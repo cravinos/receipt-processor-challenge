@@ -8,7 +8,7 @@ export const ReceiptItemSchema = z.object({
 
 
 export const ReceiptSchema = z.object({
-    retailer: z.string(),
+    retailer: z.string().min(1, { message: "Retailer cannot be empty" }),
     purchaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     purchaseTime: z.string().regex(/^\d{2}:\d{2}$/),
     items:z.array(ReceiptItemSchema).min(1, "Receipt must have at least one item"),
