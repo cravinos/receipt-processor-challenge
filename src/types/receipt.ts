@@ -2,13 +2,16 @@ import {z} from 'zod';
 
 
 export const ReceiptItemSchema = z.object({
-    shortDescription: z.string().min(1,"Description cannot be empty").transform(text => text.trim()),
-    price: z.string().regex(/^\d+\.\d{2}$/,"Price must be in format Number 00.00")
+    shortDescription: z.string()
+        .min(1, "Description cannot be empty")
+        .transform(text => text.trim()),
+    price: z.string().regex(/^\d+\.\d{2}$/, "Price must be in format Number 00.00")
 });
 
 
 export const ReceiptSchema = z.object({
-    retailer: z.string().min(1, { message: "Retailer cannot be empty" }),
+    retailer: z.string().min(1, { message: "Retailer cannot be empty" })
+    .regex(/^[a-zA-Z0-9]+$/, "Retailer must only contain alphanumeric characters"),
     purchaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     purchaseTime: z.string().regex(/^\d{2}:\d{2}$/),
     items:z.array(ReceiptItemSchema).min(1, "Receipt must have at least one item"),
