@@ -52,6 +52,12 @@ http://localhost:8000/receipts/process
 ```
 curl http://localhost:8000/receipts/RECEIPT_ID/points
 ```
+
+# you can also run the test from the rootdir of the project with 
+```
+npm test
+```
+should resolve to 18/18 individual tests
 # Receipt Processor
 
 Build a webservice that fulfils the documented API. The API is described below. A formal definition is provided 
