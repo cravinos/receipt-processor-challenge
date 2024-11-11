@@ -1,4 +1,3 @@
-import { ValidationException } from '@aws-sdk/client-bedrock-runtime';
 import express from 'express'
 import { validateReceipt } from './types/receipt';
 import routes from './routes/routes';
