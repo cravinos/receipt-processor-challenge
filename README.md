@@ -1,3 +1,63 @@
+# Santiago's Fetch backend-engineer assessment 
+
+Please make sure that you have <b>jq</b> initially installed on your mac/linux/windows pc 
+
+can be done by :
+ -  Mac: 
+     ```bash
+     brew install jq
+     ```
+   - Linux:
+     ```bash
+     sudo apt-get install jq
+     ```
+   - Windows (with Chocolatey):
+     ```bash
+     choco install jq
+     ```
+
+Run the application and tests:
+   ```bash
+   npm run docker:test
+   ```
+   this executes the full docker-compose up -d, then waits 5 seconds, then runs npm run test:api
+
+  test:api is a script i made: in : "./scripts/test-api.sh", that makes it easier for you to test this app
+  it runs the example Target sample receipt and returns its uuid made and then checks its points according to the methods built (28, it works!)
+
+  OTHERWHISE you can run it by following the below code in detached mode:
+  ```
+  docker-compose up -d --build
+  ```
+  # then,
+  # Process a receipt
+  in postman
+  ```
+curl -X POST -H "Content-Type: application/json" \
+-d '{
+  "retailer": "Target",
+  "purchaseDate": "2022-01-01",
+  "purchaseTime": "13:01",
+  "items": [
+    {
+      "shortDescription": "Mountain Dew 12PK",
+      "price": "6.49"
+    }
+  ],
+  "total": "6.49"
+}' \
+http://localhost:8000/receipts/process
+```
+# Get points (replace RECEIPT_ID with the ID you received)
+```
+curl http://localhost:8000/receipts/RECEIPT_ID/points
+```
+
+# you can also run the test from the rootdir of the project with 
+```
+npm test
+```
+should resolve to 18/18 individual tests
 # Receipt Processor
 
 Build a webservice that fulfils the documented API. The API is described below. A formal definition is provided 
